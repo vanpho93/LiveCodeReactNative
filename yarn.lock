@@ -3434,6 +3434,10 @@ react-native-drawer@^2.3.0:
   dependencies:
     tween-functions "^1.0.1"
 
+react-native-swiper@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.4.tgz#a85535b5374ef8d605a7a720e447ac46816ac448"
+
 react-native-tab-navigator@^0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.3.tgz#b222bad21fbe773c8d28f9a0de30ce62b08724d3"
