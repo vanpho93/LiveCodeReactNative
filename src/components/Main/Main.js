@@ -6,14 +6,16 @@ import Menu from './Menu';
 import Shop from './Shop/Shop';
 
 export default class Main extends Component {
-   
-
     closeControlPanel = () => {
         this.drawer.close();
     };
     openControlPanel = () => {
         this.drawer.open();
     };
+
+    componentDidMount() {
+        this.drawer.open();
+    }
 
     render() {
         const { navigator } = this.props;
