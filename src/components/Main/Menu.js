@@ -9,7 +9,7 @@ import profileIcon from '../../media/temp/profile.png';
 class Menu extends Component {
     constructor(props) {
         super(props);
-        this.state = { isLogedIn: true };
+        this.state = { isLogedIn: false };
     }
     gotoAuthentication() {
         const { navigator } = this.props;
@@ -31,7 +31,7 @@ class Menu extends Component {
         } = styles;
         const logoutJSX = (
             <View style={{ flex: 1 }}>
-                <TouchableOpacity style={btnStyle}>
+                <TouchableOpacity style={btnStyle} onPress={this.gotoAuthentication.bind(this)}>
                     <Text style={btnText}>Sign In</Text>
                 </TouchableOpacity>
             </View>
@@ -40,10 +40,10 @@ class Menu extends Component {
             <View style={loginContainer}>
                 <Text style={username}>Nguyen Van Pho</Text>
                 <View>
-                    <TouchableOpacity style={btnSignInStyle}>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.gotoOrderHistory.bind(this)}>
                         <Text style={btnTextSignIn}>Order History</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={btnSignInStyle}>
+                    <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfo.bind(this)}>
                         <Text style={btnTextSignIn}>Change Info</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle}>
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         color: '#34B089',
+        fontFamily: 'Avenir', 
         fontSize: 20
     },
     btnSignInStyle: {
