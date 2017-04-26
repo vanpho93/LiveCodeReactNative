@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 import littleIcon from '../../../../media/temp/little.jpg';
@@ -9,6 +9,10 @@ import partyIcon from '../../../../media/temp/party.jpg';
 const { width, height } = Dimensions.get('window');
 
 export default class Category extends Component {
+    gotoListProduct() {
+        const { navigator } = this.props;
+        navigator.push({ name: 'LIST_PRODUCT' });
+    }
     render() {
         const { wrapper, textStyle, imageStyle, cateTitle } = styles;
         return (
@@ -18,15 +22,21 @@ export default class Category extends Component {
                 </View>
                 <View style={{ justifyContent: 'flex-end', flex: 4 }}>
                     <Swiper showsPagination width={imageWidth} height={imageHeight} >
-                        <Image source={littleIcon} style={imageStyle}>
-                            <Text style={cateTitle}>Maxi Dress</Text>
-                        </Image>
-                        <Image source={maxiIcon} style={imageStyle}>
-                            <Text style={cateTitle}>Maxi Dress</Text>
-                        </Image>
-                        <Image source={partyIcon} style={imageStyle}>
-                            <Text style={cateTitle}>Maxi Dress</Text>
-                        </Image>
+                        <TouchableOpacity onPress={this.gotoListProduct.bind(this)}>
+                            <Image source={littleIcon} style={imageStyle}>
+                                <Text style={cateTitle}>Maxi Dress</Text>
+                            </Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.gotoListProduct.bind(this)}>
+                            <Image source={maxiIcon} style={imageStyle}>
+                                <Text style={cateTitle}>Maxi Dress</Text>
+                            </Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.gotoListProduct.bind(this)}>
+                            <Image source={partyIcon} style={imageStyle}>
+                                <Text style={cateTitle}>Maxi Dress</Text>
+                            </Image>
+                        </TouchableOpacity>
                     </Swiper>
                 </View>
             </View>
@@ -54,7 +64,7 @@ const styles = StyleSheet.create({
         color: '#AFAEAF'
     },
     imageStyle: {
-        height: imageHeight, 
+        height: imageHeight,
         width: imageWidth,
         justifyContent: 'center',
         alignItems: 'center'
