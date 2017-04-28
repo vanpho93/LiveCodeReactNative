@@ -4,17 +4,17 @@ import Collection from './Collection';
 import Category from './Category';
 import TopProduct from './TopProduct';
 
-class Home extends Component {
+class HomeView extends Component {
     render() {
-        const { types } = this.props;
+        const { types, topProducts } = this.props;
         return (
             <ScrollView style={{ flex: 1, backgroundColor: '#DBDBD8' }}>
                 <Collection />
                 <Category navigator={this.props.navigator} types={types} />
-                <TopProduct navigator={this.props.navigator} />
+                <TopProduct navigator={this.props.navigator} topProducts={topProducts} />
             </ScrollView>
         );
     }
 }
 
-export default Home;
+export default HomeView;

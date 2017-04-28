@@ -21,7 +21,8 @@ class Shop extends Component {
         super(props);
         this.state = { 
             selectedTab: 'home',
-            types: [] 
+            types: [],
+            topProducts: [] 
         };
     }
 
@@ -29,8 +30,8 @@ class Shop extends Component {
         fetch('http://localhost/api/')// eslint-disable-line
         .then(res => res.json())
         .then(resJSON => {
-            const { type } = resJSON;
-            this.setState({ types: type });
+            const { type, product } = resJSON;
+            this.setState({ types: type, topProducts: product });
         });
     }
 
@@ -41,7 +42,7 @@ class Shop extends Component {
 
     render() {
         const { iconStyle } = styles;
-        const { types, selectedTab } = this.state;
+        const { types, selectedTab, topProducts } = this.state;
         return (
             <View style={{ flex: 1 }}>
                 <Header onOpen={this.openMenu.bind(this)} />
@@ -54,7 +55,7 @@ class Shop extends Component {
                         renderSelectedIcon={() => <Image source={homeIconS} style={iconStyle} />}
                         selectedTitleStyle={{ color: '#34B089', fontFamily: 'Avenir' }}
                     >
-                        <Home types={types} />
+                        <Home types={types} topProducts={topProducts} />
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         selected={selectedTab === 'cart'}
