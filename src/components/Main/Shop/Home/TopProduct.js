@@ -14,9 +14,9 @@ export default class TopProduct extends Component {
             dataSource: ds.cloneWithRows(topProducts)
         };
     }
-    gotoDetail() {
+    gotoDetail(product) {
         const { navigator } = this.props;
-        navigator.push({ name: 'PRODUCT_DETAIL' });
+        navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
     render() {
         const { 
@@ -31,10 +31,10 @@ export default class TopProduct extends Component {
                 </View>
                 <View style={body}>
                     {this.props.topProducts.map(e => (
-                         <TouchableOpacity style={productContainer} onPress={this.gotoDetail.bind(this)} key={e.id}>
+                         <TouchableOpacity style={productContainer} onPress={() => this.gotoDetail(e)} key={e.id}>
                             <Image source={{ uri: `${url}${e.images[0]}` }} style={productImage} />
-                            <Text style={produceName}>PRODUCT NAME</Text>
-                            <Text style={producePrice}>250$</Text>
+                            <Text style={produceName}>{e.name.toUpperCase()}</Text>
+                            <Text style={producePrice}>{e.price}$</Text>
                         </TouchableOpacity>
                     ))}
                 </View>

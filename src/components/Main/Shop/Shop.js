@@ -6,6 +6,7 @@ import Home from './Home/Home';
 import Contact from './Contact/Contact';
 import Cart from './Cart/Cart';
 import Search from './Search/Search';
+import global from '../../../components/global';
 
 import homeIconS from '../../../media/appIcon/home.png';
 import homeIcon from '../../../media/appIcon/home0.png';
@@ -22,8 +23,10 @@ class Shop extends Component {
         this.state = { 
             selectedTab: 'home',
             types: [],
-            topProducts: [] 
+            topProducts: [],
+            cartArray: [] 
         };
+        global.addProductToCart = this.addProductToCart.bind(this);
     }
 
     componentDidMount() {
@@ -35,6 +38,10 @@ class Shop extends Component {
         });
     }
 
+    addProductToCart(product) {
+        this.setState({ cartArray: this.state.cartArray.concat(product) });
+    }
+
     openMenu() {
         const { open } = this.props;
         open();
@@ -42,7 +49,7 @@ class Shop extends Component {
 
     render() {
         const { iconStyle } = styles;
-        const { types, selectedTab, topProducts } = this.state;
+        const { types, selectedTab, topProducts, cartArray } = this.state;
         return (
             <View style={{ flex: 1 }}>
                 <Header onOpen={this.openMenu.bind(this)} />
@@ -63,10 +70,10 @@ class Shop extends Component {
                         onPress={() => this.setState({ selectedTab: 'cart' })}
                         renderIcon={() => <Image source={cartIcon} style={iconStyle} />}
                         renderSelectedIcon={() => <Image source={cartIconS} style={iconStyle} />}
-                        badgeText="1"
+                        badgeText={cartArray.length}
                         selectedTitleStyle={{ color: '#34B089', fontFamily: 'Avenir' }}
                     >
-                        <Cart />
+                        <Cart cartArray={cartArray} />
                     </TabNavigator.Item>
                     <TabNavigator.Item
                         selected={selectedTab === 'search'}
