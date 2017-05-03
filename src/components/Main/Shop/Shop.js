@@ -31,6 +31,7 @@ class Shop extends Component {
             cartArray: [] 
         };
         global.addProductToCart = this.addProductToCart.bind(this);
+        global.incrQuantity = this.incrQuantity.bind(this);
     }
 
     componentDidMount() {
@@ -48,6 +49,18 @@ class Shop extends Component {
             { cartArray: this.state.cartArray.concat({ product, quantity: 1 }) }, 
             () => saveCart(this.state.cartArray)
         );
+    }
+
+    incrQuantity(productId) {
+        const newCart = this.state.cartArray.map(e => {
+            if (e.product.id !== productId) return e;
+            return { product: e.product, quantity: e.quantity + 1 };
+        });
+        this.setState({ cartArray: newCart });
+    }
+
+    decrQuantity(productId) {
+
     }
 
     openMenu() {
