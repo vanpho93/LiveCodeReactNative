@@ -9,7 +9,7 @@ import profileIcon from '../../media/temp/profile.png';
 class Menu extends Component {
     constructor(props) {
         super(props);
-        this.state = { isLogedIn: true };
+        this.state = { isLogedIn: false };
     }
     gotoAuthentication() {
         const { navigator } = this.props;

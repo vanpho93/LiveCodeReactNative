@@ -4,6 +4,7 @@ import {
     TouchableOpacity, Image, StyleSheet
 } from 'react-native';
 
+import register from '../../api/register';
 import icBack from '../../media/appIcon/back_white.png';
 import icLogo from '../../media/appIcon/ic_logo.png';
 
@@ -11,6 +12,11 @@ export default class Authentication extends Component {
     constructor(props) {
         super(props);
         this.state = { isSignIn: true };
+    }
+
+    componentDidMount() {
+        register('pho000', 'van pho', '123')
+        .then(res => console.log(res));
     }
 
     signIn() {
