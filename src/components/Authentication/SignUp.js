@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import register from '../../api/register';
 
 export default class SignUp extends Component {
@@ -17,8 +17,35 @@ export default class SignUp extends Component {
         const { name, email, password } = this.state;
         register(email, name, password)
         .then(res => {
-            console.log(res);
+            if (res === 'THANH_CONG') return this.onSuccess();
+            this.onFail();
         });
+    }
+
+    removeEmail() {
+        this.setState({ email: '' });
+    }
+
+    onSuccess() {
+        Alert.alert(
+            'Notice',
+            'Sign up successfully',
+            [
+                { text: 'OK', onPress: this.removeEmail.bind(this) }
+            ],
+            { cancelable: false }
+        );
+    }
+
+    onFail() {
+        Alert.alert(
+            'Notice',
+            'Email has been used by other',
+            [
+                { text: 'OK', onPress: () => console.log('Ask me later pressed') }
+            ],
+            { cancelable: false }
+        );
     }
 
     render() {
