@@ -39,7 +39,7 @@ class Shop extends Component {
     }
 
     addProductToCart(product) {
-        this.setState({ cartArray: this.state.cartArray.concat(product) });
+        this.setState({ cartArray: this.state.cartArray.concat({ product, quantity: 1 }) });
     }
 
     openMenu() {

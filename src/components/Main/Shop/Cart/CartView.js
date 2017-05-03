@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {
-    View, Text, TouchableOpacity, ScrollView,
+    View, Text, TouchableOpacity, ListView,
     Dimensions, StyleSheet, Image
 } from 'react-native';
-
-import sp1 from '../../.././../media/temp/sp1.jpeg';
 
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
+
+const url = 'http://localhost/api/images/product/';
 
 class CartView extends Component {
     gotoDetail() {
@@ -17,32 +17,36 @@ class CartView extends Component {
     }
     render() {
         const { main, checkoutButton, checkoutTitle, wrapper,
-            product, mainRight, productController,
+            productStyle, mainRight, productController,
             txtName, txtPrice, productImage, numberOfProduct,
             txtShowDetail, showDetailContainer } = styles;
         const { cartArray } = this.props;
         return (
             <View style={wrapper}>
-                <ScrollView style={main}>
-                    {cartArray.map(product11 => (
-                        <View style={product} key={product11} >
-                            <Image source={sp1} style={productImage} />
+
+                <ListView
+                    contentContainerStyle={main}
+                    enableEmptySections
+                    dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(cartArray)}
+                    renderRow={cartItem => (
+                        <View style={productStyle}>
+                            <Image source={{ uri: `${url}${cartItem.product.images[0]}` }} style={productImage} />
                             <View style={[mainRight]}>
                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                                    <Text style={txtName}>{toTitleCase('black of the')}</Text>
+                                    <Text style={txtName}>{toTitleCase(cartItem.product.name)}</Text>
                                     <TouchableOpacity>
                                         <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View>
-                                    <Text style={txtPrice}>{100}$</Text>
+                                    <Text style={txtPrice}>{cartItem.product.price}$</Text>
                                 </View>
                                 <View style={productController}>
                                     <View style={numberOfProduct}>
                                         <TouchableOpacity>
                                             <Text>+</Text>
                                         </TouchableOpacity>
-                                        <Text>{3}</Text>
+                                        <Text>{cartItem.quantity}</Text>
                                         <TouchableOpacity>
                                             <Text>-</Text>
                                         </TouchableOpacity>
@@ -53,8 +57,8 @@ class CartView extends Component {
                                 </View>
                             </View>
                         </View>
-                    ))}
-                </ScrollView>
+                    )}
+                />
                 <TouchableOpacity style={checkoutButton}>
                     <Text style={checkoutTitle}>TOTAL {1000}$ CHECKOUT NOW</Text>
                 </TouchableOpacity>
@@ -90,7 +94,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'Avenir'
     },
-    product: {
+    productStyle: {
         flexDirection: 'row',
         margin: 10,
         padding: 10,
@@ -147,33 +151,3 @@ const styles = StyleSheet.create({
 });
 
 export default CartView;
-
-
-/*<View style={product}>
-    <Image source={sp1} style={productImage} />
-    <View style={[mainRight]}>
-        <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-            <Text style={txtName}>{toTitleCase('black of the')}</Text>
-            <TouchableOpacity>
-                <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
-            </TouchableOpacity>
-        </View>
-        <View>
-            <Text style={txtPrice}>{100}$</Text>
-        </View>
-        <View style={productController}>
-            <View style={numberOfProduct}>
-                <TouchableOpacity>
-                    <Text>+</Text>
-                </TouchableOpacity>
-                <Text>{3}</Text>
-                <TouchableOpacity>
-                    <Text>-</Text>
-                </TouchableOpacity>
-            </View>
-            <TouchableOpacity style={showDetailContainer}>
-                <Text style={txtShowDetail}>SHOW DETAILS</Text>
-            </TouchableOpacity>
-        </View>
-    </View>
-</View>*/

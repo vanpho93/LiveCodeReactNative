@@ -6,14 +6,6 @@ import {
 const url = 'http://localhost/api/images/product/';
 
 export default class TopProduct extends Component {
-    constructor(props) {
-        super(props);
-        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-        const { topProducts } = this.props;
-        this.state = {
-            dataSource: ds.cloneWithRows(topProducts)
-        };
-    }
     gotoDetail(product) {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL', product });
@@ -24,20 +16,29 @@ export default class TopProduct extends Component {
             body, productContainer, productImage,
             produceName, producePrice 
         } = styles;
+        const { topProducts } = this.props;
         return (
             <View style={container}>
                 <View style={titleContainer}>
                     <Text style={title}>TOP PRODUCT</Text>
                 </View>
-                <View style={body}>
-                    {this.props.topProducts.map(e => (
-                         <TouchableOpacity style={productContainer} onPress={() => this.gotoDetail(e)} key={e.id}>
-                            <Image source={{ uri: `${url}${e.images[0]}` }} style={productImage} />
-                            <Text style={produceName}>{e.name.toUpperCase()}</Text>
-                            <Text style={producePrice}>{e.price}$</Text>
+                
+                <ListView 
+                    contentContainerStyle={body}
+                    enableEmptySections
+                    dataSource={new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }).cloneWithRows(topProducts)}
+                    renderRow={product => (
+                        <TouchableOpacity style={productContainer} onPress={() => this.gotoDetail(product)}>
+                            <Image source={{ uri: `${url}${product.images[0]}` }} style={productImage} />
+                            <Text style={produceName}>{product.name.toUpperCase()}</Text>
+                            <Text style={producePrice}>{product.price}$</Text>
                         </TouchableOpacity>
-                    ))}
-                </View>
+                    )}
+                    renderSeparator={(sectionId, rowId) => {
+                        if (rowId % 2 === 1) return <View style={{ width, height: 10 }} />;
+                        return null;
+                    }}
+                />
             </View>
         );
     }
@@ -97,3 +98,15 @@ const styles = StyleSheet.create({
 
 
 // https://github.com/vanpho93/LiveCodeReactNative
+
+/* 
+    <View style={body}>
+        {this.props.topProducts.map(e => (
+                <TouchableOpacity style={productContainer} onPress={() => this.gotoDetail(e)} key={e.id}>
+                <Image source={{ uri: `${url}${e.images[0]}` }} style={productImage} />
+                <Text style={produceName}>{e.name.toUpperCase()}</Text>
+                <Text style={producePrice}>{e.price}$</Text>
+            </TouchableOpacity>
+        ))}
+    </View>
+*/
