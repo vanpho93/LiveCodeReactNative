@@ -12,8 +12,14 @@ function toTitleCase(str) {
 const url = 'http://localhost/api/images/product/';
 
 class CartView extends Component {
-    incrQuatity(id) {
+    incrQuantity(id) {
         global.incrQuantity(id);
+    }
+    decrQuantity(id) {
+        global.decrQuantity(id);
+    }
+    removeProduct(id) {
+        global.removeProduct(id);
     }
     gotoDetail() {
         const { navigator } = this.props;
@@ -38,7 +44,7 @@ class CartView extends Component {
                             <View style={[mainRight]}>
                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                     <Text style={txtName}>{toTitleCase(cartItem.product.name)}</Text>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.removeProduct(cartItem.product.id)}>
                                         <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -47,11 +53,11 @@ class CartView extends Component {
                                 </View>
                                 <View style={productController}>
                                     <View style={numberOfProduct}>
-                                        <TouchableOpacity onPress={() => this.incrQuatity(cartItem.product.id)}>
+                                        <TouchableOpacity onPress={() => this.incrQuantity(cartItem.product.id)}>
                                             <Text>+</Text>
                                         </TouchableOpacity>
                                         <Text>{cartItem.quantity}</Text>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.decrQuantity(cartItem.product.id)}>
                                             <Text>-</Text>
                                         </TouchableOpacity>
                                     </View>
