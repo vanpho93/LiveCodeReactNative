@@ -3,13 +3,17 @@ import {
     View, Text,
     TouchableOpacity, StyleSheet, Image
 } from 'react-native';
-
+import global from '../global';
 import profileIcon from '../../media/temp/profile.png';
 
 class Menu extends Component {
     constructor(props) {
         super(props);
-        this.state = { isLogedIn: false };
+        this.state = { user: null };
+        global.onSignIn = this.onSignIn.bind(this);
+    }
+    onSignIn(user) {
+        this.setState({ user });
     }
     gotoAuthentication() {
         const { navigator } = this.props;
@@ -29,6 +33,7 @@ class Menu extends Component {
             btnSignInStyle, btnTextSignIn, loginContainer,
             username
         } = styles;
+        const { user } = this.state;
         const logoutJSX = (
             <View style={{ flex: 1 }}>
                 <TouchableOpacity style={btnStyle} onPress={this.gotoAuthentication.bind(this)}>
@@ -38,7 +43,7 @@ class Menu extends Component {
         );
         const loginJSX = (
             <View style={loginContainer}>
-                <Text style={username}>Nguyen Van Pho</Text>
+                <Text style={username}>{user ? user.name : ''}</Text>
                 <View>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.gotoOrderHistory.bind(this)}>
                         <Text style={btnTextSignIn}>Order History</Text>
@@ -53,7 +58,7 @@ class Menu extends Component {
                 <View />
             </View>
         );
-        const mainJSX = this.state.isLogedIn ? loginJSX : logoutJSX;
+        const mainJSX = this.state.user ? loginJSX : logoutJSX;
         return (
             <View style={container}>
                 <Image source={profileIcon} style={profile} />
@@ -111,7 +116,7 @@ const styles = StyleSheet.create({
     username: {
         color: '#fff', 
         fontFamily: 'Avenir', 
-        fontSize: 20
+        fontSize: 15
     }
 });
 

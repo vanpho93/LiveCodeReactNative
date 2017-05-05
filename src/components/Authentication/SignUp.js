@@ -13,25 +13,12 @@ export default class SignUp extends Component {
         };
     }
 
-    registerUser() {
-        const { name, email, password } = this.state;
-        register(email, name, password)
-        .then(res => {
-            if (res === 'THANH_CONG') return this.onSuccess();
-            this.onFail();
-        });
-    }
-
-    removeEmail() {
-        this.setState({ email: '' });
-    }
-
     onSuccess() {
         Alert.alert(
             'Notice',
             'Sign up successfully',
             [
-                { text: 'OK', onPress: this.removeEmail.bind(this) }
+                { text: 'OK', onPress: this.props.gotoSignIn() }
             ],
             { cancelable: false }
         );
@@ -42,10 +29,23 @@ export default class SignUp extends Component {
             'Notice',
             'Email has been used by other',
             [
-                { text: 'OK', onPress: () => console.log('Ask me later pressed') }
+                { text: 'OK', onPress: () => this.removeEmail.bind(this) }
             ],
             { cancelable: false }
         );
+    }
+
+    removeEmail() {
+        this.setState({ email: '' });
+    }
+
+    registerUser() {
+        const { name, email, password } = this.state;
+        register(email, name, password)
+        .then(res => {
+            if (res === 'THANH_CONG') return this.onSuccess();
+            this.onFail();
+        });
     }
 
     render() {
