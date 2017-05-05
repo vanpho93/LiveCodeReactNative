@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'rea
 import Swiper from 'react-native-swiper';
 
 const { width } = Dimensions.get('window');
-const url = 'http://localhost/api/images/type/';
+const url = 'http://10.0.0.9/api/images/type/';
 
 export default class Category extends Component {
     gotoListProduct() {
@@ -13,21 +13,24 @@ export default class Category extends Component {
     render() {
         const { types } = this.props;
         const { wrapper, textStyle, imageStyle, cateTitle } = styles;
+        const swiper = (
+            <Swiper showsPagination width={imageWidth} height={imageHeight} >
+                { types.map(e => (
+                    <TouchableOpacity onPress={this.gotoListProduct.bind(this)} key={e.id}>
+                        <Image source={{ uri: `${url}${e.image}` }} style={imageStyle}>
+                            <Text style={cateTitle}>{e.name}</Text>
+                        </Image>
+                    </TouchableOpacity>
+                )) }
+            </Swiper>
+        );
         return (
             <View style={wrapper}>
                 <View style={{ justifyContent: 'center', height: 50 }}>
                     <Text style={textStyle} >LIST OF CATEGORY</Text>
                 </View>
                 <View style={{ justifyContent: 'flex-end', flex: 4 }}>
-                    <Swiper showsPagination width={imageWidth} height={imageHeight} >
-                        { types.map(e => (
-                            <TouchableOpacity onPress={this.gotoListProduct.bind(this)} key={e.id}>
-                                <Image source={{ uri: `${url}${e.image}` }} style={imageStyle}>
-                                    <Text style={cateTitle}>{e.name}</Text>
-                                </Image>
-                            </TouchableOpacity>
-                        )) }
-                    </Swiper>
+                    { types.length ? swiper : null }
                 </View>
             </View>
         );

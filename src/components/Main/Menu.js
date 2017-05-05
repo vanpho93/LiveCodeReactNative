@@ -6,7 +6,6 @@ import {
 import global from '../global';
 import profileIcon from '../../media/temp/profile.png';
 import saveToken from '../../api/saveToken';
-import getToken from '../../api/getToken';
 
 class Menu extends Component {
     constructor(props) {
@@ -16,11 +15,11 @@ class Menu extends Component {
     }
     onSignIn(user) {
         this.setState({ user });
-        saveToken('');
     }
 
     onSignOut() {
         this.setState({ user: null });
+        saveToken('');
     }
 
     gotoAuthentication() {
@@ -60,15 +59,6 @@ class Menu extends Component {
                         <Text style={btnTextSignIn}>Change Info</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={btnSignInStyle} onPress={this.onSignOut.bind(this)}>
-                        <Text style={btnTextSignIn}>Sign out</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style={btnSignInStyle} 
-                        onPress={() => {
-                            getToken()
-                            .then(a => console.log('TOKEN====', a));
-                        }}
-                    >
                         <Text style={btnTextSignIn}>Sign out</Text>
                     </TouchableOpacity>
                 </View>
