@@ -3,12 +3,12 @@ import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'rea
 import Swiper from 'react-native-swiper';
 
 const { width } = Dimensions.get('window');
-const url = 'http://10.0.0.9/api/images/type/';
+const url = 'http://localhost/api/images/type/';
 
 export default class Category extends Component {
-    gotoListProduct() {
+    gotoListProduct(category) {
         const { navigator } = this.props;
-        navigator.push({ name: 'LIST_PRODUCT' });
+        navigator.push({ name: 'LIST_PRODUCT', category });
     }
     render() {
         const { types } = this.props;
@@ -16,7 +16,7 @@ export default class Category extends Component {
         const swiper = (
             <Swiper showsPagination width={imageWidth} height={imageHeight} >
                 { types.map(e => (
-                    <TouchableOpacity onPress={this.gotoListProduct.bind(this)} key={e.id}>
+                    <TouchableOpacity onPress={() => this.gotoListProduct(e)} key={e.id}>
                         <Image source={{ uri: `${url}${e.image}` }} style={imageStyle}>
                             <Text style={cateTitle}>{e.name}</Text>
                         </Image>

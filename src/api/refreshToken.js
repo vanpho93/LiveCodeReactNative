@@ -1,7 +1,7 @@
 import saveToken from './saveToken';
 
 const refreshToken = (token) => {
-    fetch('http://10.0.0.9/api/refresh_token.php',
+    fetch('http://localhost/api/refresh_token.php',
     {   
         method: 'POST',
         headers: {
