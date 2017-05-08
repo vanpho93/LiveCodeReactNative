@@ -34,6 +34,7 @@ class Shop extends Component {
         global.incrQuantity = this.incrQuantity.bind(this);
         global.decrQuantity = this.decrQuantity.bind(this);
         global.removeProduct = this.removeProduct.bind(this);
+        global.gotoSearch = this.gotoSearch.bind(this);
     }
 
     componentDidMount() {
@@ -44,6 +45,10 @@ class Shop extends Component {
         });
         getCart()
         .then(cartArray => this.setState({ cartArray }));
+    }
+
+    gotoSearch() {
+        this.setState({ selectedTab: 'search' });
     }
 
     addProductToCart(product) {

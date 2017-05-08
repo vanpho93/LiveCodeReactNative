@@ -3,5 +3,6 @@ module.exports = {
     incrQuantity: null,
     decrQuantity: null,
     removeProduct: null,
-    onSignIn: null
+    onSignIn: null,
+    gotoSearch: null
 };

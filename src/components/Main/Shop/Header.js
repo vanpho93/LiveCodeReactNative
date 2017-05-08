@@ -2,13 +2,28 @@ import React, { Component } from 'react';
 import { 
     View, Text, TouchableOpacity, Image, Dimensions, TextInput, StyleSheet 
 } from 'react-native';
-
+import global from '../../global';
 import icLogo from '../../../media/appIcon/ic_logo.png';
 import icMenu from '../../../media/appIcon/ic_menu.png';
+import search from '../../../api/searchProduct';
 
 const { height } = Dimensions.get('window');
 
 export default class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            txtSearch: ''
+        };
+    }
+
+    onSearch() {
+        const { txtSearch } = this.state;
+        search(txtSearch)
+        .then(arrProduct => console.log(arrProduct))
+        .catch(err => console.log(err));
+    }
+
     render() {
         const { wrapper, row1, textInput, iconStyle, titleStyle } = styles;
         return (
@@ -23,7 +38,10 @@ export default class Header extends Component {
                 <TextInput 
                     style={textInput}
                     placeholder="What do you want to buy?"
-                    underlineColorAndroid="transparent" 
+                    underlineColorAndroid="transparent"
+                    onChangeText={text => this.setState({ txtSearch: text })}
+                    onFocus={() => global.gotoSearch()} 
+                    onSubmitEditing={this.onSearch.bind(this)}
                 />
             </View>
         );
