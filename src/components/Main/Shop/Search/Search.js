@@ -12,7 +12,7 @@ class Search extends Component {
                 renderScene={(route, navigator) => {
                     switch (route.name) {
                         case 'SEARCH_VIEW': return <SearchView navigator={navigator} />;
-                        default: return <ProductDetail navigator={navigator} />;
+                        default: return <ProductDetail navigator={navigator} product={route.product} />;
                     }
                 }}
             />

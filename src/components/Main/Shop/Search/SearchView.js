@@ -4,7 +4,7 @@ import {
     ListView, View, Image, Dimensions
 } from 'react-native';
 import global from '../../../global';
-import sp1 from '../../../../media/temp/sp3.jpeg';
+
 const url = 'http://localhost/api/images/product/';
 
 function toTitleCase(str) {
@@ -25,9 +25,9 @@ class SearchView extends Component {
         this.setState({ listProduct: this.state.listProduct.cloneWithRows(arrProduct) });
     }
 
-    gotoDetail() {
+    gotoDetail(product) {
         const { navigator } = this.props;
-        navigator.push({ name: 'PRODUCT_DETAIL' });
+        navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
     render() {
         const {
@@ -58,7 +58,7 @@ class SearchView extends Component {
                                         }}
                                     />
                                 </View>
-                                <TouchableOpacity style={showDetailContainer}>
+                                <TouchableOpacity style={showDetailContainer} onPress={() => this.gotoDetail(productItem)}>
                                     <Text style={txtShowDetail}>SHOW DETAILS</Text>
                                 </TouchableOpacity>
                             </View>
