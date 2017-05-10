@@ -13,7 +13,7 @@ class Cart extends Component {
                 renderScene={(route, navigator) => {
                     switch (route.name) {
                         case 'CART_VIEW': return <CartView navigator={navigator} cartArray={cartArray} />;
-                        default: return <ProductDetail navigator={navigator} />;
+                        default: return <ProductDetail navigator={navigator} product={route.product} />;
                     }
                 }}
             />
