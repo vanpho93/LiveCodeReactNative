@@ -1,5 +1,5 @@
 const getOrderHistory = (token) => (
-    fetch('http://localhost/api/order_history.php',
+    fetch('http://10.0.0.13/api/order_history.php',
     {   
         method: 'POST',
         headers: {

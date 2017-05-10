@@ -1,5 +1,5 @@
 const searchProduct = (key) => {
-    const url = `http://localhost/api/search.php?key=${key}`;
+    const url = `http://10.0.0.13/api/search.php?key=${key}`;
     return fetch(url)
     .then(res => res.json());
 };
