@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
-import map from '../../../../media/appIcon/map.png';
+import MapView from 'react-native-maps';
 
 import phoneIcon from '../../../../media/appIcon/phone.png';
 import mailIcon from '../../../../media/appIcon/mail.png';
@@ -16,9 +16,21 @@ class Contact extends Component {
         return (
             <View style={wrapper}>
                 <View style={mapContainer}>
-                    <Image 
-                        style={{ flex: 1, alignSelf: 'stretch', width: undefined }} source={map} 
-                    />
+                    <MapView
+                        style={{ width: width - 20, height: 250 }}
+                        initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                    >
+                        <MapView.Marker
+                            coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
+                            title="Khoa Pham"
+                            description="React Native Khoa pham training"
+                        />
+                    </MapView>
                 </View>
                 <View style={infoContainer}>
                     <View style={rowInfoContainer}>
