@@ -1,0 +1,33 @@
+// mongoimport --db shop --collection products --jsonArray --file a.json
+[
+    {
+        "name": "Quisque at placerat leo",
+        "desc": "Proin pharetra lectus non neque gravida maximus. Sed a erat justo. Donec ac ultrices diam. Suspendisse dictum turpis id arcu pellentesque, sed laoreet leo blandit. In fermentum iaculis nisl ut maximus. Nunc rutrum eros nec interdum dictum.",
+        "image": "1.jpg",
+        "video": "222235865"
+    },
+    {
+        "name": "Morbi vel vehicula felis",
+        "desc": "Nunc enim justo, finibus in sapien id, laoreet hendrerit ex. Sed blandit posuere ante, luctus commodo tellus. Nunc efficitur elit sed neque vehicula accumsan. Donec eleifend, felis eget laoreet efficitu.",
+        "image": "2.jpg",
+        "video": "218508470"
+    },
+    {
+        "name": "Aliquam lobortis ligula vel",
+        "desc": "Integer et enim a nulla aliquam mattis ac sit amet arcu. Donec sit amet tristique sapien. Duis posuere, ipsum nec sollicitudin laoreet.",
+        "image": "4.jpg",
+        "video": "221821296"
+    },
+    {
+        "name": "Aenean consectetur lacus non",
+        "desc": "Curabitur eu libero fermentum eros finibus rutrum. Nam non turpis ligula. Fusce ut nibh cursus turpis molestie porttitor. Pellentesque consequat massa enim, id pulvinar nisi volutpat in. itora torquent per conubia nostra, per inceptos.",
+        "image": "5.jpg",
+        "video": "221117048"
+    },
+    {
+        "name": "Cras sit amet odio",
+        "desc": "Integer egestas ultrices mi a efficitur. Duis vestibulum vitae nibh eget tempor. Suspendisse potenti. Ut euismod quis ipsum ut consectetur. Orci varius natoque penatibus et magnis dis parturient montes..",
+        "image": "3.jpg",
+        "video": "137094136"
+    }
+]
